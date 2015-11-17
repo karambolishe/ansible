@@ -1,0 +1,12 @@
+---
+- hosts: all_12.04
+  user: root
+#  gather_facts: no
+
+  roles:
+#  - preconf
+#  - repo_ubuntu_12_04
+#  - domain_conf_setup_12
+  - zabbix_agent_12
+#  - postfix
+#  - cron_12

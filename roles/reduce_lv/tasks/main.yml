@@ -1,0 +1,19 @@
+---
+  - name: mount home directory
+    mount: name=/home state=present fstype=ext4 src=/dev/sysvg/homelv
+
+#  - name: Remove logical volume
+#    lvol: vg=sysvg lv=homelv state=absent force=yes
+
+#  - name: Reduce logical volume
+#    lvol: vg=sysvg lv=homelv size=10240 force=yes
+
+#  - name: Create logical volume
+#    lvol: vg=sysvg lv=homelv size=10G
+
+  - name: Extend the logical volume
+    lvol: vg=sysvg lv=varlv size=20G
+#
+#   - name: Resize to file system
+#     command: /sbin/resize2fs /dev/sysvg/varlv
+

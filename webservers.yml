@@ -1,0 +1,20 @@
+---
+- hosts: buildservers
+  tasks:
+  - name: start quickbuild agent
+    service: name=quickbuild state=started
+
+  - name: start zabbix agent
+    service: name=zabbix-agent state=started
+
+  - name: configure zabbix agent
+    template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf owner=root group=root mode=644
+    notify:
+    - restart zabbix
+
+  - 
+
+  handlers:
+  - name: restart zabbix
+    service: name=zabbix-agent state=restarted
+

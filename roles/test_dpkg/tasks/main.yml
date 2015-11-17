@@ -1,0 +1,6 @@
+---
+- name: package for official repo zabbix
+  copy: src=zabbix-release_2.0-1precise_all.deb dest=/tmp/zabbix-release.deb mode=550
+
+- name: install deb repo zabbix
+  apt: deb=/tmp/zabbix-release.deb state=absent

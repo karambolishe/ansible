@@ -1,0 +1,11 @@
+---
+  - name: Add HQ repo key
+    apt_key: url=http://106.125.52.17/keys/dpi_package.key state=present
+
+  - name: Sources list HQ android_build_1404
+    apt_repository: repo='deb http://p-repo-app0.surc.kiev.ua/10.252.241.211/android_build_1404/ trusty dpi'
+    notify: update source list with HQ
+
+#  - name: Sources list HQ dpi_packages_1404
+#    apt_repository: repo='deb [arch=amd64] http://p-repo-app0.surc.kiev.ua/10.252.241.211/dpi_packages_1404/ trusty dpi'
+#    notify: update source list with HQ

@@ -1,0 +1,59 @@
+---
+- name: install samsungdev package
+  apt: name={{ item }} update_cache=yes force=yes
+  with_items:
+  - samsungdev
+  - python-imaging
+#  - libpython2.7=2.7.3-0ubuntu3.5
+#  - python2.7=2.7.3-0ubuntu3.5
+#  - python2.7-minimal=2.7.3-0ubuntu3.5
+- name: copy quickbuild agent
+  copy: src=/etc/ansible/roles/buildservers/files/buildagent dest=/usr/
+
+- name: mode access for files
+  file: path=/usr/buildagent/bin/{{ item }} mode=0755
+  with_items:
+  - agent.sh
+  - config.sh
+  - wrapper-aix-ppc-32
+  - wrapper-aix-ppc-64
+  - wrapper-freebsd-x86-32
+  - wrapper-freebsd-x86-64
+  - wrapper-hpux-ia-32
+  - wrapper-hpux-ia-64
+  - wrapper-hpux-parisc-32
+  - wrapper-hpux-parisc-64
+  - wrapper-linux-390-32
+  - wrapper-linux-390-64
+  - wrapper-linux-ia-64
+  - wrapper-linux-ppc-32
+  - wrapper-linux-ppc-64
+  - wrapper-linux-x86-32
+  - wrapper-linux-x86-64
+  - wrapper-macosx-universal-32
+  - wrapper-macosx-universal-64
+  - wrapper-solaris-sparc-32
+  - wrapper-solaris-sparc-64
+  - wrapper-solaris-x86-32
+  - wrapper-solaris-x86-64
+  - wrapper-windows-ia-64.dll
+  - wrapper-windows-ia-64.exe
+  - wrapper-windows-x86-32.dll
+  - wrapper-windows-x86-32.exe
+  - wrapper-windows-x86-64.dll
+  - wrapper-windows-x86-64.exe
+
+- name: copy certificate
+  copy: src=/etc/ansible/roles/buildservers/files/.sign dest=/root/
+  notify:
+  - restart quickbuild
+
+- name: link init daemon
+  file: src=/usr/buildagent/bin/agent.sh dest=/etc/init.d/quickbuild state=link
+
+- name: start quickbuild agent
+  service: name=quickbuild state=started
+
+- name: configuring agetn update-rc.d
+  command: /usr/sbin/update-rc.d quickbuild start 99 2 3 4 5 . stop 01 0 1 6 .
+  

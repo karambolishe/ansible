@@ -1,0 +1,34 @@
+---
+  - name: Configuring sources list vmware main
+    apt_repository: repo='deb http://packages.vmware.com/packages/ubuntu trusty main'
+    notify: update source list
+
+  - name: Add vmwre key
+    apt_key: url=http://106.125.52.17/keys/VMWARE-PACKAGING-GPG-RSA-KEY.pub state=present
+
+  - name: Install VMWare tools
+    apt: name={{ item }} state=latest update_cache=yes
+    with_items:
+      - open-vm-tools
+#      - open-vm-tools-deploypkg
+
+
+#- name: Create work directory
+#  file: path=/tmp/VMwareTools state=directory mode=0755
+#
+#- name: Copy and unpack tarbol that include new version VMWare tools
+#  unarchive: src=VMwareTools.tar.gz dest=/tmp/VMwareTools
+#
+#- name: Check old version
+#  stat: path=/etc/vmware-tools
+#  register: old_vmware_stat
+#
+#- name: Remove old version
+#  command: "rm -rf /etc/vmware-tools"
+#  when: old_vmware_stat.stat.exists == True
+#
+#- name: Run VMware tools
+#  script: /usr/bin/perl /tmp/VMwareTools/vmware-tools-distrib/vmware-install.pl -d
+#
+#- name: Delete sources tools
+#  file: path=/tmp/VMwareTools state=absent

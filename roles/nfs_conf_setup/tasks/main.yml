@@ -1,0 +1,24 @@
+---
+- name: Install software standart
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+  - nfs-common
+  - rpcbind
+
+- name: create directory for samba share
+  file: path=/mnt/p-smb-fs0 state=directory
+
+- name: create additional directory
+  file: path=/mnt/p-smb-fs0/{{ item }} state=directory
+  with_items:
+  - scripts
+  - kk
+
+- name: mount kit-kat volume
+  mount: name=/mnt/p-smb-fs0/kk src=106.125.52.13:/mnt/storage/dpi/pbs/kk fstype=nfs opts=rw,async state=present
+
+- name: mount scripts volume
+  mount: name=/mnt/p-smb-fs0/scripts src=106.125.52.13:/mnt/storage/dpi/pbs/scripts fstype=nfs opts=rw,async state=present
+
+- name: execute mount
+  command: /bin/mount -a

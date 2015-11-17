@@ -1,0 +1,27 @@
+---
+# - name: Copy deb file likewise
+#   copy: src=pbis-open-8.3.0.3287.linux.x86_64.deb.sh dest=/mnt/pbis-open-8.3.0.3287.linux.x86_64.deb.sh mode=550
+#
+# - name: Install software for configure domain options
+#   shell: /mnt/pbis-open-8.3.0.3287.linux.x86_64.deb.sh --confirm >>/var/log/install_likewise.log
+#
+ - name: Copy source file for instalation PowerBroker package
+   copy: src=pbis-open-8.3.0.3287.linux.x86_64.deb.sh dest=/tmp/pbis-open-8.3.0.3287.linux.x86_64.deb.sh mode=0550
+
+ - name: Install software for configure domain options
+   shell: "/tmp/pbis-open-8.3.0.3287.linux.x86_64.deb.sh install"
+
+ - name: Putting to domain
+   command: /usr/bin/domainjoin-cli join {{ domain }} {{ user }} {{ pass }}
+
+ - name: Domain name prefix
+   command: /opt/pbis/bin/config AssumeDefaultDomain true
+
+ - name: Format string user's home directory path.
+   command: /opt/pbis/bin/config HomeDirTemplate "%H/%U"
+
+ - name: Restrict access to computer
+   command: /opt/pbis/bin/config RequireMembershipOf "SURC\\surc.dpi.linux"
+
+ - name: Default shell
+   command: /opt/pbis/bin/config LoginShellTemplate "/bin/bash"

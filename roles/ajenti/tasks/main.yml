@@ -1,0 +1,19 @@
+---
+#  - name: Copy bashrc file
+#    copy: src=bashrc dest=/root/.bashrc mode=0644
+
+#  - name: Configure sudoers file group sudo
+#    lineinfile: "dest=/home/m.novikov/test_sudoers state=present regexp='%sudo' line='%sudo           ALL=(ALL:ALL)NOPASSWD: ALL'"
+#  
+#  - name: Configure sudoers file group surc.dpi.linux
+#    lineinfile: "dest=/home/m.novikov/test_sudoers regexp='^%sudo' insertafter='^#%sudo' line='%surc.dpi.linux           ALL=(ALL:ALL)NOPASSWD: ALL'"
+#
+#	Version 2
+#  - name: Configure sudoers file
+#    lineinfile:
+#      dest: /home/m.novikov/test_sudoers
+#      regexp: "{{ item.regexp }}"
+#      line: "{{ item.line }}"
+#    with_items:
+#      - {regexp: '%sudo', line: '%sudo           ALL=(ALL:ALL)NOPASSWD: ALL'}
+#      - {regexp: '%surc.dpi.linux', insertbefore: '# See sudoers(5)', line: '%surc.dpi.linux ALL=(ALL:ALL)NOPASSWD: ALL'}

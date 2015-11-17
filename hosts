@@ -1,0 +1,112 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers
+[all_12.04]
+#p-andr-rbs00.surc.kiev.ua
+#p-ads-app0.surc.kiev.ua
+#p-ahiles-fs0.surc.kiev.ua
+p-p4proxy-app0.surc.kiev.ua
+p-p4proxy-app1.surc.kiev.ua
+p-puppet-app0.surc.kiev.ua
+#p-qb-app0.surc.kiev.ua
+#p-qb-app1.surc.kiev.ua
+p-repo-app0.surc.kiev.ua
+p-bugtraq-web0.surc.kiev.ua
+#t-dp-web0.surc.kiev.ua
+#t-qb-app0.surc.kiev.ua
+#p-andr-ss01.surc.kiev.ua
+#p-andr-ss03.surc.kiev.ua
+#p-andr-ss04.surc.kiev.ua
+#p-andr-ss05.surc.kiev.ua
+#p-andr-ss06.surc.kiev.ua
+#p-andr-ss07.surc.kiev.ua
+
+#green.example.com
+#blue.example.com
+#192.168.100.1
+#192.168.100.10
+
+[all_14.04]
+#p-andr-rbs01.surc.kiev.ua
+#p-andr-rbs02.surc.kiev.ua
+#p-andr-rbs03.surc.kiev.ua
+#p-andr-rbs04.surc.kiev.ua
+#p-andr-rbs05.surc.kiev.ua
+#p-andr-bs09.surc.kiev.ua
+#p-andr-bs10.surc.kiev.ua
+#p-andr-bs12.surc.kiev.ua
+#p-andr-bs14.surc.kiev.ua
+#t-rwb-web0.surc.kiev.ua
+#p-smb-fs0.surc.kiev.ua
+#p-sga-web0.surc.kiev.ua
+#t-sga-web0.surc.kiev.ua
+#106.125.52.47
+#106.125.52.49
+
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group
+[p4proxy]
+p-p4proxy-app0.surc.kiev.ua
+p-p4proxy-app1.surc.kiev.ua
+
+[webservers]
+#alpha.example.org
+#beta.example.org
+#192.168.1.100
+#192.168.1.110
+#t-qb-app0.surc.kiev.ua
+
+# If you have multiple hosts following a pattern you can specify
+# them like this:
+
+#www[001:006].example.com
+[buildservers12]
+p-andr-rbs00.surc.kiev.ua
+
+[buildservers14]
+p-andr-rbs01.surc.kiev.ua
+p-andr-rbs02.surc.kiev.ua
+p-andr-rbs03.surc.kiev.ua
+p-andr-rbs04.surc.kiev.ua
+p-andr-rbs05.surc.kiev.ua
+p-andr-bs09.surc.kiev.ua
+p-andr-bs10.surc.kiev.ua
+p-andr-bs12.surc.kiev.ua
+p-andr-bs14.surc.kiev.ua
+
+[syncservers]
+p-andr-ss01
+p-andr-ss03
+p-andr-ss04
+p-andr-ss05
+p-andr-ss06
+p-andr-ss07
+
+[VMWare]
+p-andr-rbs00.surc.kiev.ua
+#p-andr-rbs01.surc.kiev.ua
+#p-andr-rbs02.surc.kiev.ua
+#p-andr-rbs03.surc.kiev.ua
+#p-andr-rbs04.surc.kiev.ua
+#p-andr-rbs05.surc.kiev.ua
+#p-p4proxy-app1.surc.kiev.ua
+#p-puppet-app0.surc.kiev.ua
+#p-qb-app0.surc.kiev.ua
+#p-qb-app1.surc.kiev.ua
+#p-repo-app0.surc.kiev.ua
+#p-bugtraq-web0.surc.kiev.ua
+#p-smb-fs0.surc.kiev.ua
+#t-dp-web0.surc.kiev.ua
+#t-qb-app0.surc.kiev.ua
+
+
+#db-[99:101]-node.example.com
+

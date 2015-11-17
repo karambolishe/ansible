@@ -1,0 +1,13 @@
+---
+#- hosts: syncservers
+- hosts: p-andr-ss03
+
+  user: root
+#  gather_facts: no
+
+  roles:
+
+#  - preconf
+#  - repo_ubuntu_12_04
+  - domain_conf_setup_12
+#  - nfs_conf_setup

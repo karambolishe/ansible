@@ -1,0 +1,9 @@
+---
+#- hosts: syncservers
+- hosts: p-andr-bs09.surc.kiev.ua
+
+  user: root
+#  gather_facts: no
+
+  roles:
+  - domain_conf_setup_14

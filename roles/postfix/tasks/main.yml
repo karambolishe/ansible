@@ -1,0 +1,14 @@
+---
+  - name: Install MTA Postfix
+    apt: name={{ item }} state=latest update_cache=yes
+    with_items:
+      - postfix
+      - mailutils
+  
+  - name: configure postfix
+    template: src=/etc/ansible/roles/postfix/templates/main.cf.j2 dest=/etc/postfix/main.cf owner=root group=root mode=640
+    notify:
+    - restart postfix
+
+  - name: start postfix
+    service: name=postfix state=started

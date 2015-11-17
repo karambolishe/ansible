@@ -1,0 +1,7 @@
+---
+- hosts: p4proxy
+  user: root
+#  gather_facts: no
+
+  roles:
+  - p4proxy

@@ -1,0 +1,3 @@
+---
+- name: restart quickbuild
+  service: name=quickbuild state=restarted

@@ -1,0 +1,26 @@
+---
+- name: Install software standart
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+  - zabbix-agent
+  - sysstat
+
+- name: directory for zabbix
+  file: path=/etc/zabbix/scripts state=directory
+
+- name: files for zabbix iostat
+  copy: src=iostat.sh dest=/etc/zabbix/scripts/iostat.sh mode=550
+
+#- name: files for zabbix mysql
+#  copy: src=mysql-stats.sh dest=/etc/zabbix/scripts/mysql-stats.sh mode=550
+#
+#- name: files for zabbix apache
+#  copy: src=apache-stats.sh dest=/etc/zabbix/scripts/pache-stats.sh mode=550
+
+- name: configure zabbix agent
+  template: src=/etc/ansible/roles/zabbix_agent_12/template/zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf owner=root group=root mode=644
+  notify:
+  - restart zabbix
+
+- name: start zabbix agent
+  service: name=zabbix-agent state=started

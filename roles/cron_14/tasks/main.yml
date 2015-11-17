@@ -1,0 +1,24 @@
+---
+  - name: Crontab Env mail
+    cron: name="MAILTO section" minute="MAILTO=m.novikov@samsung.com" job="" hour="" day="" month="" weekday=""
+  
+  - name: Crontab Env shell
+    cron: name="Used SHELL" minute="SHELL=/bin/bash" job="" hour="" day="" month="" weekday=""
+
+  - name: Crontab Env path
+    cron: name="Used PATH" minute="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" job="" hour="" day="" month="" weekday=""
+
+  - name: Crontab Env home dir
+    cron: name="Used HOME" minute="HOME=/root" job="" hour="" day="" month="" weekday=""
+
+  - name: Crontab autorized users
+    cron: name="Check authorized users" minute="55" hour="23" job="/root/lastLogin.sh"
+
+  - name: Crontab update source list
+    cron: name="Update source list" minute="00" hour="8" job="/root/lastLogin.sh >>/dev/null"
+
+  - name: Crontab Autoclean cached package
+    cron: name="Update source list" minute="00" hour="7" job="/root/lastLogin.sh >>/dev/null"
+
+  - name: Crontab update dns name 
+    cron: name="Update dns name" minute="00" hour="7" job="/opt/pbis/bin/update-dns >/dev/null 2>&1"

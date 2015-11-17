@@ -1,0 +1,75 @@
+---
+  - name: Does exist sources.list?
+    stat: path=/etc/apt/sources.list
+    register: st
+
+  - name: Move old sources.list
+    command: mv /etc/apt/sources.list /etc/apt/bak.sources.list
+    when: st.stat.exists
+
+  - name: Configuring sources list main
+    apt_repository: repo='deb http://p-repo-app0.surc.kiev.ua/ua.archive.ubuntu.com/12_04/ precise main restricted universe multiverse' 
+    notify: update source list
+
+  - name: Configuring sources list precise-security
+    apt_repository: repo='deb http://p-repo-app0.surc.kiev.ua/ua.archive.ubuntu.com/12_04/ precise-security main restricted universe multiverse'
+    notify: update source list
+
+  - name: Configuring sources list precise-updates 
+    apt_repository: repo='deb http://p-repo-app0.surc.kiev.ua/ua.archive.ubuntu.com/12_04/ precise-updates main restricted universe multiverse'
+    notify: update source list
+
+  - name: Configuring sources list precise-backports
+    apt_repository: repo='deb http://p-repo-app0.surc.kiev.ua/ua.archive.ubuntu.com/12_04/ precise-backports main restricted universe multiverse'
+    notify: update source list
+
+  - name: Configuring sources list zabbix main
+    apt_repository: repo='deb http://repo.zabbix.com/zabbix/2.0/ubuntu precise main'
+    notify: update source list
+
+  - name: Add zabbix key
+    apt_key: url=http://106.125.52.17/keys/zabbix-official-repo.key state=present
+    
+  - name: Add ajenti key
+    apt_key: url=http://106.125.52.17/keys/ajenti.key state=present
+
+  - name: Configuring sources list ajenti main
+    apt_repository: repo='deb http://repo.ajenti.org/ng/debian main main ubuntu'
+    notify: update source list
+
+  - name: Install software standart
+    apt: name={{ item }} state=latest update_cache=yes
+    with_items:
+      - aptitude
+      - libcap2
+      - bash
+      - curl
+      - apt
+      - apt-transport-https
+      - apt-utils
+      - base-files
+      - bsdutils
+      - dmidecode
+      - man-db
+      - mount
+      - openssl
+      - htop
+      - tzdata
+      - wget
+      - nmap
+      - tcptraceroute
+      - ajenti
+
+#  - name: Configure sudoers file group sudo
+#    lineinfile: "dest=/home/m.novikov/test_sudoers state=present regexp='%sudo' line='%sudo           ALL=(ALL:ALL)NOPASSWD: ALL'"
+  
+#  - name: Configure sudoers file group surc.dpi.linux
+#    lineinfile: "dest=/home/m.novikov/test_sudoers regexp='^%sudo' insertafter='^#%sudo' line='%surc.dpi.linux           ALL=(ALL:ALL)NOPASSWD: ALL'"
+#  - name: Configure sudoers file
+#    lineinfile:
+#      dest: /home/m.novikov/test_sudoers
+#      regexp: "{{ item.regexp }}"
+#      line: "{{ item.line }}"
+#    with_items:
+#      - {regexp: '%sudo', line: '%sudo           ALL=(ALL:ALL)NOPASSWD: ALL'}
+#      - {regexp: '%surc.dpi.linux', insertbefore: '# See sudoers(5)', line: '%surc.dpi.linux ALL=(ALL:ALL)NOPASSWD: ALL'}

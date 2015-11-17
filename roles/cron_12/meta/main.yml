@@ -1,0 +1,4 @@
+---
+dependencies:
+  - { role: preconf }
+  - { role: repo_ubuntu_12_04 }

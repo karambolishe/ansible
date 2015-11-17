@@ -1,0 +1,13 @@
+---
+- hosts: all_14.04
+  user: root
+#  gather_facts: no
+
+  roles:
+  - repo_ubuntu_14_04
+  - domain_conf_setup_14
+  - preconf
+  - zabbix_agent_14
+  - postfix
+  - cron_14
+# - reduce_lv

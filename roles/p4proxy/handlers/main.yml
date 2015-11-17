@@ -1,0 +1,3 @@
+---
+- name: restart p4proxy
+  service: name=p4p state=restarted

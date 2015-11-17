@@ -1,0 +1,3 @@
+---
+ - name: restart sshd daemon
+   command: service ssh restart

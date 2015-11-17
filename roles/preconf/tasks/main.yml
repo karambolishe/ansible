@@ -1,0 +1,47 @@
+---
+  - name: Copy bashrc file
+    copy: src=bashrc dest=/root/.bashrc mode=0644
+
+  - name: Copy lastlogin.sh
+    copy: src=lastLogin.sh dest=/root/lastLogin.sh mode=0544
+
+  - name: Copy sudoers file
+    copy: src=sudoers dest=/etc/sudoers mode=0440
+
+  - name: Copy sshd config file
+    copy: src=sshd_config dest=/etc/ssh/sshd_config mode=0644
+    notify: restart sshd daemon
+
+  - name: Copy file of clearing memory
+    copy: src=clear_cache.sh dest=/root/clear_cache.sh mode=0500
+
+  - name: Copy authorized_keys
+    copy: src=authorized_keys dest=/root/.ssh/authorized_keys mode=0600
+
+#  - name: Chek home m.novikov
+#    file: path=/home/m.novikov state=directory owner=m.novikov mode=0755
+#
+#  - name: Chek ssh m.novikov
+#    file: path=/home/m.novikov/.ssh state=directory mode=0700
+#
+#  - name: Copy authorized_keys for m.novikov
+#    copy: src=authorized_keys dest=/home/m.novikov/.ssh/authorized_keys mode=0600
+
+  - name: Copy vim_user_conf
+    copy: src=vimrc dest=/root/.vimrc mode=0600
+
+#  - name: Configure sudoers file group sudo
+#    lineinfile: "dest=/home/m.novikov/test_sudoers state=present regexp='%sudo' line='%sudo           ALL=(ALL:ALL)NOPASSWD: ALL'"
+#  
+#  - name: Configure sudoers file group surc.dpi.linux
+#    lineinfile: "dest=/home/m.novikov/test_sudoers regexp='^%sudo' insertafter='^#%sudo' line='%surc.dpi.linux           ALL=(ALL:ALL)NOPASSWD: ALL'"
+#
+#	Version 2
+#  - name: Configure sudoers file
+#    lineinfile:
+#      dest: /home/m.novikov/test_sudoers
+#      regexp: "{{ item.regexp }}"
+#      line: "{{ item.line }}"
+#    with_items:
+#      - {regexp: '%sudo', line: '%sudo           ALL=(ALL:ALL)NOPASSWD: ALL'}
+#      - {regexp: '%surc.dpi.linux', insertbefore: '# See sudoers(5)', line: '%surc.dpi.linux ALL=(ALL:ALL)NOPASSWD: ALL'}

@@ -1,0 +1,9 @@
+---
+- hosts: buildservers14
+  user: root
+#  gather_facts: no
+
+  roles:
+  - repo_ubuntu_14_04_HQ
+  - buildservers
+  - nfs_conf_setup
