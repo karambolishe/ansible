@@ -2,3 +2,4 @@ files
 rols.tar.gz
 .git
 .gitignore
+group_vars/all
