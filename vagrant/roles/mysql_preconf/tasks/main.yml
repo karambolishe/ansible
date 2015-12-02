@@ -1,0 +1,14 @@
+- name: Update and then safe upgrade installed packages
+  apt:
+    update_cache=yes
+    upgrade=yes
+
+- name: Installing useful utilities
+  apt: pkg={{ item }}
+  with_items: preconf.utilities
+
+- name: Apply sysctl settings
+  sysctl:
+    name={{ item.key }}
+    value={{ item.value }}
+  with_dict: preconf.sysctl

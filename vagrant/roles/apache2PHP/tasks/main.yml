@@ -1,0 +1,11 @@
+- name: Install apache2 and php
+  apt: pkg={{ item }}
+  with_items:
+  - php5 
+  - libapache2-mod-php5
+  - php5-mcrypt
+  - php5-gd
+  - libssh2-php
+
+- name: Configure Apache2
+  copy: src=dir.conf dest=/etc/apache2/mods-available/dir.conf owner=root group=root mode=644

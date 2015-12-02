@@ -1,0 +1,7 @@
+---
+- hosts: all
+  sudo: true
+  roles:
+  - mysql_preconf
+  - mysql_install
+  - apache2PHP
