@@ -1,0 +1,17 @@
+---
+- name: download tarbol WordPress
+  get_url: url=http://wordpress.org/latest.zip dest=/var/www/html
+
+- name: Unzip tarbol wordpress
+  unarchive: src=/var/www/html/latest.zip dest=/var/www/html copy=no
+
+- name: specify credentials on web folder
+  file: path=/var/www/html state=directory owner=www-data mode=0755
+
+- name: copy config file for Wordpress
+  copy: src=wp-config.php dest=/var/www/html/wp-config.php
+
+- name: create virtualHost in Apache2
+  copy: src=000-default.conf dest=/etc/apache2/sites-available/000-default.conf
+  notify:
+  - restart apache

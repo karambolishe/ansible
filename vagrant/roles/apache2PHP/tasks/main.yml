@@ -9,3 +9,5 @@
 
 - name: Configure Apache2
   copy: src=dir.conf dest=/etc/apache2/mods-available/dir.conf owner=root group=root mode=644
+  notify:
+  - restart apache
